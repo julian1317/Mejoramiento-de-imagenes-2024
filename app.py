@@ -3,10 +3,11 @@ from algoritmo import algoritmo
 import numpy as np
 import cv2
 
+valores_permitidos = [0, 1, 3, 5]
 st.title("Sube una imagen borrosa que quieras restaurar")
 test_image = st.file_uploader("Escoge una imagen")
 sigma = st.slider("Mueve este slider para ajustar la limpieza de tu imagen", 0, 10000, 1000, 10)
-ksize = st.slider("Mueve este slider para ajustar la limpieza de tu imagen", 0, 1, 5, step=1)
+ksize = st.select_slider("Mueve este slider para ajustar la limpieza de tu imagen", options=valores_permitidos)
 
 if test_image is not None:
     col1, col2, col3 = st.columns(3)
