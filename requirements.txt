@@ -3,3 +3,4 @@ numpy
 streamlit
 statsmodels
 opencv-python-headless
+os

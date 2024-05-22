@@ -2,6 +2,12 @@ import streamlit as st
 from algoritmo import algoritmo
 import numpy as np
 import cv2
+import os
+
+port = int(os.environ.get("PORT", 8501))
+
+# Ejecutar el comando Streamlit con el puerto especificado
+os.system(f"streamlit run app.py --server.port {port}")
 
 valores_permitidos = [0, 1, 3, 5]
 st.title("Sube una imagen borrosa que quieras restaurar")
