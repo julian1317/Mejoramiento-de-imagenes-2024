@@ -20,8 +20,7 @@ def calcular_matriz_de_distancias(imagen):
     # Obtener las dimensiones de la imagen
     ALTO,ANCHO = imagen.shape
 
-    u_central = ANCHO // 2
-    v_central = ALTO // 2
+
 
     # Calcular las distancias euclidianas y almacenarlas en D
     u = np.arange(ANCHO)
@@ -35,36 +34,13 @@ def calcular_matriz_de_distancias(imagen):
 
     return D
 
-def calcular_D0(imagen):
-    # Obtener las dimensiones de la imagen
-    ALTO,ANCHO = imagen.shape
 
-    u_central = ANCHO // 2
-    v_central = ALTO // 2
-
-    # Calcular las distancias euclidianas y almacenarlas en D
-    u = np.arange(ANCHO)
-    v = np.arange(ALTO)
-
-    # Utilizar la función meshgrid para crear matrices de coordenadas
-    U, V = np.meshgrid(u, v)    
-
-    # Calcular la distancia euclidiana de cada punto al origen
-    D = np.sqrt((U-u_central)**2 + (V-v_central)**2)
-
-    return D
 
 def calcular_H_Gaussiana(D, theta):
     # Calcular H(u, v)
     E = math.e
     H =E ** (-((D ** 2) / (2 * (theta ** 2))))
 
-    return H
-
-def calcular_H_low_pass(D_0,D):
-    # Calcular H(u, v)
-    H =np.where(D > D_0, 1, 0)
-    print(H)
     return H
 
 
@@ -80,13 +56,7 @@ def guardar_imagen(carpeta, nombre_archivo, imagen):
     ruta_guardar = os.path.join(carpeta, nombre_archivo)
     cv2.imwrite(ruta_guardar, imagen)
 
-def centrar_espectro(imagen):
-    ALTO,ANCHO = imagen.shape
-    u = np.arange(ANCHO)
-    v = np.arange(ALTO)
-    U, V = np.meshgrid(u, v)
-    imagen_centrada=np.abs(imagen * (-1) ** (U + V))
-    return imagen_centrada
+
     
 
 def restaurar(imagen, sigma):
@@ -111,7 +81,3 @@ def aplicar_laplaciano(imagen):
     laplaciano = cv2.Laplacian(imagen, cv2.CV_64F)
     laplaciano = np.uint8(laplaciano)
     return laplaciano
-
-
-    
-

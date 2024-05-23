@@ -4,10 +4,8 @@ import numpy as np
 import cv2
 import os
 
-port = int(os.environ.get("PORT", 8501))
 
 # Ejecutar el comando Streamlit con el puerto especificado
-os.system(f"streamlit run app.py --server.port {port}")
 
 valores_permitidos = [0, 1, 3, 5]
 st.title("Sube una imagen borrosa que quieras restaurar")
@@ -21,7 +19,6 @@ if test_image is not None:
     test_image = cv2.imdecode(test_image, 1)
     imagen_restaurada, imagen1 = algoritmo.restaurar(test_image, sigma)
     sobel = algoritmo.aplicar_sobel(imagen_restaurada, ksize)
-    laplaciano = algoritmo.aplicar_laplaciano(imagen_restaurada)
     
     with col1:
         st.subheader("Imagen original")
